@@ -1,0 +1,291 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+
+    /* ===== Theme Variables ===== */
+    :root {
+      --bg-color: #000;
+      --text-color: #fff;
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --input-bg: rgba(255, 255, 255, 0.2);
+      --input-focus: rgba(255, 255, 255, 0.35);
+      --btn-gradient: linear-gradient(90deg, #6e8efb, #a777e3);
+    }
+
+    body.light {
+      --bg-color: #f5f5f5;
+      --text-color: #222;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --input-bg: rgba(0, 0, 0, 0.1);
+      --input-focus: rgba(0, 0, 0, 0.2);
+      --btn-gradient: linear-gradient(90deg, #a777e3, #6e8efb);
+    }
+
+    /* ===== Video Background ===== */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(60%) saturate(120%);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ===== Preloader ===== */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid var(--text-color);
+      border-top: 6px solid #6e8efb;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+    }
+
+    .preloader p {
+      margin-top: 20px;
+      letter-spacing: 2px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== Container ===== */
+    .container {
+      position: relative;
+      width: 400px;
+      min-height: 520px;
+      background: var(--glass-bg);
+      border-radius: 20px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      transition: all 0.6s ease-in-out;
+      transform: scale(0.95);
+      animation: fadeUp 1.5s ease forwards 1.5s;
+      opacity: 0;
+    }
+
+    @keyframes fadeUp {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .forms {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      transition: transform 0.7s ease-in-out;
+    }
+
+    form {
+      width: 50%;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      animation: slideIn 1s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    form h2 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      color: var(--text-color);
+    }
+
+    .input-box {
+      position: relative;
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 10px;
+      background: var(--input-bg);
+      color: var(--text-color);
+      outline: none;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    .input-box input:focus {
+      background: var(--input-focus);
+      transform: scale(1.02);
+    }
+
+    .input-box input::placeholder {
+      color: #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: var(--btn-gradient);
+      color: #fff;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .toggle-text {
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+
+    .toggle-text span {
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .container.active .forms {
+      transform: translateX(-50%);
+    }
+
+    /* ===== Bubbles ===== */
+    .bubbles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bubbles span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: rise 10s infinite ease-in;
+      bottom: -100px;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-700px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Theme Toggle Button ===== */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      width: 45px;
+      height: 45px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 11;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg);
+    }
+
+    .theme-toggle i {
+      font-size: 20px;
+      color: var(--text-color);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+        min-height: 500px;
+        border-radius: 15px;
+      }
+      form { padding: 40px 20px; }
+      form h2 { font-size: 1.8em; }
+      .btn { font-size: 0.9em; }
+    }

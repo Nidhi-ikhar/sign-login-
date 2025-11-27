@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Login & Signup | Dark Light Mode</title>
+
+  <link rel=stylesheet href="style.css">
+</head>
+<body>
+
+  <!-- 🎥 Video Background -->
+  <video autoplay loop muted playsinline>
+    <source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+
+  <!-- ☀️🌙 Theme Toggle Button -->
+  <div class="theme-toggle" id="themeToggle">
+    <i id="themeIcon">🌙</i>
+  </div>
+
+  <!-- ⏳ Preloader -->
+  <div class="preloader">
+    <div class="spinner"></div>
+    <p>Loading Experience...</p>
+  </div>
+
+  <!-- ===== Main Container ===== -->
+  <div class="container" id="container">
+    <div class="forms">
+      <!-- LOGIN FORM -->
+      <form id="loginForm">
+        <h2>Welcome Back</h2>
+        <div class="input-box">
+          <input type="email" placeholder="Email" required />
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Password" required />
+        </div>
+        <button class="btn">Login</button>
+        <div class="toggle-text">
+          Don't have an account? <span id="showSignup">Sign Up</span>
+        </div>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form id="signupForm">
+        <h2>Create Account</h2>
+        <div class="input-box">
+          <input type="text" placeholder="Username" required />
+        </div>
+        <div class="input-box">
+          <input type="email" placeholder="Email" required />
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Password" required />
+        </div>
+        <button class="btn">Sign Up</button>
+        <div class="toggle-text">
+          Already have an account? <span id="showLogin">Login</span>
+        </div>
+      </form>
+    </div>
+
+    <!-- Bubbles -->
+    <div class="bubbles">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+    const showSignup = document.getElementById("showSignup");
+    const showLogin = document.getElementById("showLogin");
+    const preloader = document.querySelector(".preloader");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+
+    // Toggle forms
+    showSignup.addEventListener("click", () => container.classList.add("active"));
+    showLogin.addEventListener("click", () => container.classList.remove("active"));
+
+    // Preloader fade-out
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        preloader.style.opacity = "0";
+        preloader.style.visibility = "hidden";
+      }, 1500);
+    });
+
+    // Theme Toggle Logic
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "light") {
+      document.body.classList.add("light");
+      themeIcon.textContent = "☀️";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      const isLight = document.body.classList.contains("light");
+      themeIcon.textContent = isLight ? "☀️" : "🌙";
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    });
+  </script>
+</body>
+</html>
